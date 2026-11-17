@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>호준이 형, 수능 대박을 기원합니다</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Black Han Sans & Pretendard -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&display=swap" rel="stylesheet">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tone.js for Sound Effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+    <style>
+        :root {
+            --neon-pink: #FF007F;
+            --neon-cyan: #00F3FF;
+            --neon-yellow: #FFE600;
+            --neon-green: #39FF14;
+            --bg-night: #05050A;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: var(--bg-night);
+            /* 서울 밤거리 아스팔트 + 도트 LED 매트릭스 패턴 */
+            background-image: 
+                radial-gradient(rgba(0, 243, 255, 0.12) 1px, transparent 1px),
+                radial-gradient(rgba(255, 0, 127, 0.12) 1px, #05050A 1px);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+            color: #FFFFFF;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .font-signboard {
+            font-family: 'Black Han Sans', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        .font-dohyeon {
+            font-family: 'Do Hyeon', sans-serif;
+        }
+
+        /* 정신없는 LED 채널 간판 글로우 & 깜빡임 */
+        .neon-text-pink {
+            color: #FFF;
+            text-shadow: 
+                0 0 5px #fff,
+                0 0 12px #FF007F,
+                0 0 25px #FF007F,
+                0 0 45px #FF007F;
+        }
+
+        .neon-text-cyan {
+            color: #FFF;
+            text-shadow: 
+                0 0 5px #fff,
+                0 0 12px #00F3FF,
+                0 0 25px #00F3FF,
+                0 0 45px #00F3FF;
+        }
+
+        .neon-text-yellow {
+            color: #FFF;
+            text-shadow: 
+                0 0 5px #fff,
+                0 0 10px #FFE600,
+                0 0 20px #FF9900;
+        }
+
+        /* 간판 불량 접촉처럼 깜빡이는 플리커 애니메이션 */
+        @keyframes neonFlicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                opacity: 1;
+                text-shadow: 0 0 5px #fff, 0 0 15px #FF007F, 0 0 30px #FF007F, 0 0 50px #FF007F;
+            }
+            20%, 24%, 55% {
+                opacity: 0.4;
+                text-shadow: none;
+            }
+        }
+
+        .animate-flicker {
+            animation: neonFlicker 2.5s infinite alternate;
+        }
+
+        /* LED 간판 박스 테두리 (무지개 네온 펄스) */
+        @keyframes borderParty {
+            0% { border-color: #FF007F; box-shadow: 0 0 20px #FF007F, inset 0 0 15px rgba(255, 0, 127, 0.3); }
+            33% { border-color: #00F3FF; box-shadow: 0 0 20px #00F3FF, inset 0 0 15px rgba(0, 243, 255, 0.3); }
+            66% { border-color: #FFE600; box-shadow: 0 0 20px #FFE600, inset 0 0 15px rgba(255, 230, 0, 0.3); }
+            100% { border-color: #FF007F; box-shadow: 0 0 20px #FF007F, inset 0 0 15px rgba(255, 0, 127, 0.3); }
+        }
+
+        .led-signboard-box {
+            background: rgba(10, 10, 18, 0.88);
+            backdrop-filter: blur(8px);
+            border: 4px solid #FF007F;
+            animation: borderParty 3s linear infinite;
+        }
+
+        /* 상단 흐르는 전광판 (Marquee) */
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marqueeScroll 14s linear infinite;
+        }
+
+        /* 정신없는 네온 버튼 */
+        .btn-neon-crazy {
+            background: linear-gradient(90deg, #FF007F, #FF5E00, #FFE600, #39FF14, #00F3FF, #FF007F);
+            background-size: 300% 300%;
+            animation: gradientRun 2s ease infinite;
+            color: #05050A;
+            font-weight: 900;
+            border: 3px solid #FFFFFF;
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.8), 0 0 35px rgba(0, 243, 255, 0.6);
+            transition: transform 0.15s;
+        }
+
+        @keyframes gradientRun {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .btn-neon-crazy:hover {
+            transform: scale(1.04) rotate(-1deg);
+        }
+
+        .btn-neon-crazy:active {
+            transform: scale(0.96);
+        }
+
+        /* 캔버스 배경 고정 */
+        #fireworksCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: auto;
+        }
+
+        /* 콘텐츠 레이어 */
+        .content-layer {
+            position: relative;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .interactive-element {
+            pointer-events: auto;
+        }
+
+        /* 통통 튀는 간판 배지 */
+        @keyframes bounceCrazy {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-6px) rotate(2deg); }
+        }
+
+        .animate-bounce-crazy {
+            animation: bounceCrazy 1.2s ease-in-out infinite;
+        }
+
+        /* 3D 카드 플립 애니메이션 스타일 */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem;
+        }
+
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* 광탈 흔들림 애니메이션 */
+        @keyframes shakeCard {
+            0%, 100% { transform: rotateY(180deg) translateX(0); }
+            20% { transform: rotateY(180deg) translateX(-8px) rotateZ(-4deg); }
+            40% { transform: rotateY(180deg) translateX(8px) rotateZ(4deg); }
+            60% { transform: rotateY(180deg) translateX(-5px); }
+            80% { transform: rotateY(180deg) translateX(5px); }
+        }
+
+        .flip-card.flipped.fail-shake .flip-card-inner {
+            animation: shakeCard 0.45s ease-in-out 0.3s;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-pink-500 selection:text-white">
+
+    <!-- 상단 LED 전광판 티커 (서울 종로/강남 스타일) -->
+    <div class="relative z-20 w-full bg-black border-b-2 border-cyan-400 py-2 overflow-hidden shadow-[0_0_15px_#00F3FF]">
+        <div class="marquee-track font-dohyeon text-sm sm:text-base tracking-wider">
+            <span class="mx-4 text-yellow-300">🚨 [속보] 호준이 형 수능 대박 조짐 포착!! 🚨</span>
+            <span class="mx-4 text-cyan-400">★ 찍는 족족 정답 ★ 1등급 프리패스 ★</span>
+            <span class="mx-4 text-pink-500">🔥 서울대·고려대·연세대·GIST 동시 합격 기원 🔥</span>
+            <span class="mx-4 text-lime-400">⚡ 카이스트는 노잼 광탈ㅋ ⚡</span>
+            <span class="mx-4 text-yellow-300">🚨 [속보] 호준이 형 수능 대박 조짐 포착!! 🚨</span>
+            <span class="mx-4 text-cyan-400">★ 찍는 족족 정답 ★ 1등급 프리패스 ★</span>
+            <span class="mx-4 text-pink-500">🔥 서울대·고려대·연세대·GIST 동시 합격 기원 🔥</span>
+            <span class="mx-4 text-lime-400">⚡ 카이스트 멀어서 광탈ㅋ ⚡</span>
+        </div>
+    </div>
+
+    <!-- 불꽃놀이 캔버스 -->
+    <canvas id="fireworksCanvas"></canvas>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main class="content-layer flex-grow flex flex-col items-center justify-center px-3 py-8 sm:px-6 lg:px-8">
+        
+        <!-- 상단 네온 간판 배지 -->
+        <div class="interactive-element mb-5 text-center animate-bounce-crazy">
+            <div class="inline-flex items-center gap-2 px-5 py-1.5 rounded-md border-2 border-yellow-300 bg-black shadow-[0_0_15px_#FFE600] text-yellow-300 text-xs sm:text-sm font-dohyeon tracking-widest">
+                <span>⚡ 24시 연중무휴 합격 보장 센터 ⚡</span>
+            </div>
+        </div>
+
+        <!-- 메인 LED 채널 간판 보드 -->
+        <div class="interactive-element led-signboard-box w-full max-w-2xl rounded-2xl p-5 sm:p-10 text-center relative overflow-hidden">
+            
+            <!-- 간판 고정 볼트 장식 (4 모서리) -->
+            <div class="absolute top-3 left-3 w-3.5 h-3.5 rounded-full bg-zinc-400 border-2 border-zinc-700 shadow-inner"></div>
+            <div class="absolute top-3 right-3 w-3.5 h-3.5 rounded-full bg-zinc-400 border-2 border-zinc-700 shadow-inner"></div>
+            <div class="absolute bottom-3 left-3 w-3.5 h-3.5 rounded-full bg-zinc-400 border-2 border-zinc-700 shadow-inner"></div>
+            <div class="absolute bottom-3 right-3 w-3.5 h-3.5 rounded-full bg-zinc-400 border-2 border-zinc-700 shadow-inner"></div>
+
+            <!-- 타이틀 (채널 간판 입체 네온 텍스트) -->
+            <div class="inline-block bg-pink-600/20 border border-pink-500 px-3 py-0.5 rounded text-pink-300 text-xs sm:text-sm font-dohyeon mb-2">
+                ★ 서울특별시 합격구 대박동 1번지 ★
+            </div>
+            <h1 class="font-signboard text-4xl sm:text-6xl leading-tight mb-6 tracking-wide">
+                <span class="neon-text-cyan block sm:inline"></span>수능 대박 PS5가자<br>
+                <span class="neon-text-pink animate-flicker text-5xl sm:text-7xl">형 재수없다</span>
+            </h1>
+
+            <!-- 섹션 1: 대학 합격 운세 미니게임 -->
+            <div class="bg-black/80 border-2 border-cyan-400 shadow-[0_0_15px_rgba(0,243,255,0.4)] rounded-xl p-4 sm:p-5 mb-6">
+                <div class="flex items-center justify-between mb-4 pb-2 border-b border-cyan-500/40">
+                    <div class="text-left">
+                        <span class="inline-block bg-cyan-400 text-black text-[11px] font-black px-2 py-0.5 rounded mb-1">
+                            EVENT 01. 입시 전광판
+                        </span>
+                        <h2 class="font-dohyeon text-lg sm:text-xl text-white">
+                            대학 간판 터치해서 <span class="text-yellow-300">합격 불빛</span> 켜기!
+                        </h2>
+                    </div>
+                    <button id="resetUniCardsBtn" class="shrink-0 px-3 py-1.5 rounded border-2 border-pink-500 bg-pink-950/60 hover:bg-pink-600 text-white text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-[0_0_10px_#FF007F]">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        <span>리셋</span>
+                    </button>
+                </div>
+
+                <!-- 5개 대학 카드 그리드 -->
+                <div id="uniCardsGrid" class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                    <!-- JS로 동적 생성됨 -->
+                </div>
+            </div>
+
+            <!-- 섹션 2: 수능 성적표 미리보기 미니게임 -->
+            <div class="bg-black/80 border-2 border-lime-400 shadow-[0_0_15px_rgba(57,255,20,0.4)] rounded-xl p-4 sm:p-5 mb-7">
+                <div class="flex items-center justify-between mb-4 pb-2 border-b border-lime-500/40">
+                    <div class="text-left">
+                        <span class="inline-block bg-lime-400 text-black text-[11px] font-black px-2 py-0.5 rounded mb-1">
+                            EVENT 02. 성적표 스포일러
+                        </span>
+                        <h2 class="font-dohyeon text-lg sm:text-xl text-white">
+                            과목별 간판 눌러서 <span class="text-lime-300">미리 점수 확인!</span>
+                        </h2>
+                    </div>
+                    <button id="resetSubjectCardsBtn" class="shrink-0 px-3 py-1.5 rounded border-2 border-cyan-400 bg-cyan-950/60 hover:bg-cyan-500 hover:text-black text-white text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-[0_0_10px_#00F3FF]">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        <span>리셋</span>
+                    </button>
+                </div>
+
+                <!-- 4개 과목 카드 그리드 (국어, 수학, 영어, 탐구) -->
+                <div id="subjectCardsGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <!-- JS로 동적 생성됨 -->
+                </div>
+            </div>
+
+            <!-- 액션 버튼 그룹 -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5">
+                <button id="grandFireworksBtn" class="btn-neon-crazy w-full sm:w-auto px-7 py-4 rounded-xl text-lg sm:text-xl font-dohyeon tracking-wider flex items-center justify-center gap-2 cursor-pointer">
+                    <span>🎆 폭죽 풀가동 버튼 🎆</span>
+                </button>
+                
+                <button id="soundToggleBtn" class="w-full sm:w-auto px-5 py-4 rounded-xl border-2 border-yellow-300 bg-black hover:bg-yellow-300 hover:text-black text-yellow-300 text-sm font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_12px_rgba(255,230,0,0.4)]">
+                    <i id="soundIcon" class="fa-solid fa-volume-xmark"></i>
+                    <span id="soundLabel">효과음 ON/OFF</span>
+                </button>
+            </div>
+
+            <!-- 하단 전광판 안내 -->
+            <div class="mt-6 pt-4 border-t-2 border-dashed border-zinc-700 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs sm:text-sm font-dohyeon">
+                <span class="text-cyan-300">👉 밤하늘 아무 데나 막 누르면 폭죽 터짐!!</span>
+                <span class="text-pink-400">형을 제일 응원하는 동생 드림 🤟</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- 알림 토스트 메시지 (네온 간판 스타일) -->
+    <div id="toastMessage" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-lg bg-black border-2 border-yellow-300 text-yellow-300 font-dohyeon text-base shadow-[0_0_25px_#FFE600] transition-all duration-200 opacity-0 translate-y-4 pointer-events-none whitespace-nowrap">
+        메시지가 표시됩니다.
+    </div>
+
+    <script>
+        /**
+         * 호준이 형 수능 응원 페이지 - 서울 LED 채널 간판 버전
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('fireworksCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            // 사운드 설정 (Tone.js)
+            let isSoundEnabled = false;
+            let synth = null;
+
+            function initAudio() {
+                if (!synth) {
+                    synth = new Tone.PolySynth(Tone.Synth, {
+                        oscillator: { type: "square" }, // 8비트 아케이드/간판 느낌의 경쾌한 사운드
+                        envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.8 }
+                    }).toDestination();
+                    synth.volume.value = -14;
+                }
+            }
+
+            function playSparkleSound() {
+                if (!isSoundEnabled || !synth) return;
+                try {
+                    const notes = ["C5", "E5", "G5", "B5", "D6", "G6"];
+                    const randomNote = notes[Math.floor(Math.random() * notes.length)];
+                    synth.triggerAttackRelease(randomNote, "16n");
+                } catch (e) {
+                    console.error("Audio error:", e);
+                }
+            }
+
+            // 합격 팡파레 효과음
+            function playFanfareSound() {
+                if (!isSoundEnabled || !synth) return;
+                try {
+                    const now = Tone.now();
+                    synth.triggerAttackRelease("C5", "16n", now);
+                    synth.triggerAttackRelease("E5", "16n", now + 0.08);
+                    synth.triggerAttackRelease("G5", "16n", now + 0.16);
+                    synth.triggerAttackRelease("C6", "4n", now + 0.24);
+                } catch (e) {
+                    console.error("Audio error:", e);
+                }
+            }
+
+            // 광탈 장난 효과음
+            function playFailSound() {
+                if (!isSoundEnabled || !synth) return;
+                try {
+                    const now = Tone.now();
+                    synth.triggerAttackRelease("Eb4", "16n", now);
+                    synth.triggerAttackRelease("D4", "16n", now + 0.14);
+                    synth.triggerAttackRelease("Db4", "16n", now + 0.28);
+                    synth.triggerAttackRelease("C4", "4n", now + 0.42);
+                } catch (e) {
+                    console.error("Audio error:", e);
+                }
+            }
+
+            // 사운드 토글 버튼
+            const soundToggleBtn = document.getElementById('soundToggleBtn');
+            const soundIcon = document.getElementById('soundIcon');
+            const soundLabel = document.getElementById('soundLabel');
+
+            soundToggleBtn.addEventListener('click', async () => {
+                await Tone.start();
+                initAudio();
+                isSoundEnabled = !isSoundEnabled;
+                if (isSoundEnabled) {
+                    soundIcon.className = 'fa-solid fa-volume-high';
+                    soundLabel.textContent = '효과음 ON!';
+                    showToast('🔊 아케이드 네온 효과음 가동!!');
+                    playSparkleSound();
+                } else {
+                    soundIcon.className = 'fa-solid fa-volume-xmark';
+                    soundLabel.textContent = '효과음 OFF';
+                }
+            });
+
+            // 토스트 알림 함수
+            const toastEl = document.getElementById('toastMessage');
+            let toastTimeout;
+            function showToast(msg) {
+                toastEl.textContent = msg;
+                toastEl.classList.remove('opacity-0', 'translate-y-4');
+                toastEl.classList.add('opacity-100', 'translate-y-0');
+                clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(() => {
+                    toastEl.classList.remove('opacity-100', 'translate-y-0');
+                    toastEl.classList.add('opacity-0', 'translate-y-4');
+                }, 2500);
+            }
+
+            // ==========================================
+            // 1. 5개 명문대 LED 간판 카드 플립 미니게임
+            // ==========================================
+            const universities = [
+                {
+                    id: 'snu',
+                    name: '서울대학교',
+                    eng: 'SNU',
+                    neonBorder: '#3B82F6',
+                    isPass: true,
+                    resultText: '합격!!',
+                    subText: '관악산 접수 완료',
+                    svg: `<svg viewBox="0 0 64 64" class="w-11 h-11 mb-1 drop-shadow-[0_0_8px_#60A5FA]">
+                            <path d="M32 6 L54 14 V32 C54 46 32 58 32 58 C32 58 10 46 10 32 V14 Z" fill="#1D4ED8" stroke="#93C5FD" stroke-width="3"/>
+                            <text x="32" y="34" font-size="11" font-weight="bold" fill="#FFFFFF" text-anchor="middle" font-family="sans-serif">SNU</text>
+                            <text x="32" y="45" font-size="8" fill="#DBEAFE" text-anchor="middle" font-family="sans-serif">서울대</text>
+                          </svg>`
+                },
+                {
+                    id: 'korea',
+                    name: '고려대학교',
+                    eng: 'KOREA',
+                    neonBorder: '#F43F5E',
+                    isPass: true,
+                    resultText: '합격!!',
+                    subText: '안암동 호랑이',
+                    svg: `<svg viewBox="0 0 64 64" class="w-11 h-11 mb-1 drop-shadow-[0_0_8px_#FB7185]">
+                            <path d="M14 10 H50 V34 C50 47 32 56 32 56 C32 56 14 47 14 34 Z" fill="#BE123C" stroke="#FECDD3" stroke-width="3"/>
+                            <circle cx="32" cy="30" r="11" fill="none" stroke="#FECDD3" stroke-width="2"/>
+                            <text x="32" y="34" font-size="11" font-weight="bold" fill="#FFFFFF" text-anchor="middle" font-family="sans-serif">KU</text>
+                          </svg>`
+                },
+                {
+                    id: 'yonsei',
+                    name: '연세대학교',
+                    eng: 'YONSEI',
+                    neonBorder: '#00F3FF',
+                    isPass: true,
+                    resultText: '합격!!',
+                    subText: '신촌 독수리',
+                    svg: `<svg viewBox="0 0 64 64" class="w-11 h-11 mb-1 drop-shadow-[0_0_8px_#00F3FF]">
+                            <circle cx="32" cy="32" r="24" fill="#0369A1" stroke="#67E8F9" stroke-width="3"/>
+                            <text x="32" y="39" font-size="19" font-weight="bold" fill="#FFFFFF" text-anchor="middle" font-family="sans-serif">ㅇㅅ</text>
+                          </svg>`
+                },
+                {
+                    id: 'kaist',
+                    name: '카이스트',
+                    eng: 'KAIST',
+                    neonBorder: '#A855F7',
+                    isPass: false,
+                    resultText: '광탈ㅋ',
+                    subText: '서울대 가자 형ㅋ',
+                    svg: `<svg viewBox="0 0 64 64" class="w-11 h-11 mb-1 drop-shadow-[0_0_8px_#C084FC]">
+                            <polygon points="32,8 56,24 48,52 16,52 8,24" fill="#6B21A8" stroke="#E9D5FF" stroke-width="3"/>
+                            <text x="32" y="37" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle" font-family="sans-serif">KAIST</text>
+                          </svg>`
+                },
+                {
+                    id: 'gist',
+                    name: 'GIST',
+                    eng: '지스트',
+                    neonBorder: '#FF5E00',
+                    isPass: true,
+                    resultText: '합격!!',
+                    subText: '과학 영재 등극',
+                    svg: `<svg viewBox="0 0 64 64" class="w-11 h-11 mb-1 drop-shadow-[0_0_8px_#FB923C]">
+                            <rect x="12" y="12" width="40" height="40" rx="10" fill="#C2410C" stroke="#FED7AA" stroke-width="3"/>
+                            <text x="32" y="37" font-size="13" font-weight="bold" fill="#FFFFFF" text-anchor="middle" font-family="sans-serif">GIST</text>
+                          </svg>`
+                }
+            ];
+
+            const uniCardsGrid = document.getElementById('uniCardsGrid');
+            const resetUniCardsBtn = document.getElementById('resetUniCardsBtn');
+
+            function renderUniCards() {
+                uniCardsGrid.innerHTML = '';
+                universities.forEach((uni, index) => {
+                    const cardWrapper = document.createElement('div');
+                    const spanClass = index === 4 ? 'col-span-2 sm:col-span-1 max-w-[160px] sm:max-w-none mx-auto w-full' : 'w-full';
+                    cardWrapper.className = `uni-flip-card flip-card perspective-1000 h-36 cursor-pointer select-none group ${spanClass}`;
+                    
+                    // 뒷면 스타일: 눈부신 LED 네온 간판 점등 효과
+                    const backStyle = uni.isPass
+                        ? 'background: #FFE600; border: 3px solid #FFFFFF; color: #05050A; box-shadow: 0 0 25px #FFE600;'
+                        : 'background: #18181B; border: 3px solid #FF007F; color: #FF007F; box-shadow: 0 0 25px #FF007F;';
+
+                    const badgeText = uni.isPass
+                        ? '<span class="px-2 py-0.5 bg-black text-yellow-300 text-[10px] font-black rounded mb-1">★ 경축 ★</span>'
+                        : '<span class="px-2 py-0.5 bg-pink-600 text-white text-[10px] font-black rounded mb-1">삐빅-!</span>';
+
+                    cardWrapper.innerHTML = `
+                        <div class="flip-card-inner">
+                            <!-- 카드 앞면 (꺼진 네온 간판 느낌 -> 호버 시 점등) -->
+                            <div class="flip-card-front bg-zinc-900/95 border-2 transition-all group-hover:scale-[1.03]" style="border-color: ${uni.neonBorder}; box-shadow: 0 0 12px ${uni.neonBorder}66;">
+                                ${uni.svg}
+                                <span class="font-dohyeon text-base text-white tracking-wide">${uni.name}</span>
+                                <span class="mt-1.5 text-[10px] font-bold px-2 py-0.5 rounded bg-white/10 text-yellow-300 border border-yellow-300/40">
+                                    클릭해서 불켜기
+                                </span>
+                            </div>
+
+                            <!-- 카드 뒷면 (결과) -->
+                            <div class="flip-card-back" style="${backStyle}">
+                                ${badgeText}
+                                <span class="font-signboard text-3xl tracking-tight">${uni.resultText}</span>
+                                <span class="text-[11px] font-extrabold mt-0.5">${uni.subText}</span>
+                            </div>
+                        </div>
+                    `;
+
+                    cardWrapper.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        if (cardWrapper.classList.contains('flipped')) return;
+
+                        cardWrapper.classList.add('flipped');
+
+                        const rect = cardWrapper.getBoundingClientRect();
+                        const centerX = rect.left + rect.width / 2;
+                        const centerY = rect.top + rect.height / 2;
+
+                        if (uni.isPass) {
+                            playFanfareSound();
+                            showToast(`🚨 [경축] ${uni.name} 최종 합격 불빛 점등!! 🚨`);
+                            createFirework(centerX, centerY - 60, true);
+                            setTimeout(() => createFirework(centerX - 60, centerY - 100, true), 120);
+                            setTimeout(() => createFirework(centerX + 60, centerY - 100, true), 240);
+                        } else {
+                            cardWrapper.classList.add('fail-shake');
+                            playFailSound();
+                            showToast(`🤣 삐빅-! 카이스트 광탈ㅋ 서울대 가자 형!!`);
+                        }
+                    });
+
+                    uniCardsGrid.appendChild(cardWrapper);
+                });
+            }
+
+            resetUniCardsBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                document.querySelectorAll('.uni-flip-card').forEach(card => {
+                    card.classList.remove('flipped', 'fail-shake');
+                });
+                showToast('🔄 대학 간판 전원 리셋 완료!');
+            });
+
+            // ==========================================
+            // 2. 수능 과목별 점수 LED 간판 미니게임
+            // ==========================================
+            const subjects = [
+                {
+                    id: 'korean',
+                    name: '국어',
+                    score: '96점',
+                    grade: '가볍게 1등급!',
+                    icon: 'fa-book-open',
+                    borderColor: '#FF007F',
+                    isPerfect: false
+                },
+                {
+                    id: 'math',
+                    name: '수학',
+                    score: '100점',
+                    grade: '미친 만점!!',
+                    icon: 'fa-square-root-variable',
+                    borderColor: '#00F3FF',
+                    isPerfect: true
+                },
+                {
+                    id: 'english',
+                    name: '영어',
+                    score: '97점',
+                    grade: '절대평가 1등급!',
+                    icon: 'fa-earth-americas',
+                    borderColor: '#FFE600',
+                    isPerfect: false
+                },
+                {
+                    id: 'science',
+                    name: '탐구',
+                    score: '100점',
+                    grade: '다 맞았음!!',
+                    icon: 'fa-atom',
+                    borderColor: '#39FF14',
+                    isPerfect: true
+                }
+            ];
+
+            const subjectCardsGrid = document.getElementById('subjectCardsGrid');
+            const resetSubjectCardsBtn = document.getElementById('resetSubjectCardsBtn');
+
+            function renderSubjectCards() {
+                subjectCardsGrid.innerHTML = '';
+                subjects.forEach((subj) => {
+                    const cardWrapper = document.createElement('div');
+                    cardWrapper.className = 'subject-flip-card flip-card perspective-1000 h-36 cursor-pointer select-none group w-full';
+
+                    const backStyle = subj.isPerfect
+                        ? 'background: #39FF14; border: 3px solid #FFFFFF; color: #05050A; box-shadow: 0 0 25px #39FF14;'
+                        : 'background: #00F3FF; border: 3px solid #FFFFFF; color: #05050A; box-shadow: 0 0 25px #00F3FF;';
+
+                    const crownBadge = subj.isPerfect
+                        ? '<span class="text-[10px] font-black px-2 py-0.5 rounded bg-black text-lime-400 mb-1">🔥 만점 신화 🔥</span>'
+                        : '<span class="text-[10px] font-black px-2 py-0.5 rounded bg-black text-cyan-300 mb-1">⚡ 1등급 컷 ⚡</span>';
+
+                    cardWrapper.innerHTML = `
+                        <div class="flip-card-inner">
+                            <!-- 카드 앞면 -->
+                            <div class="flip-card-front bg-zinc-900/95 border-2 transition-all group-hover:scale-[1.03]" style="border-color: ${subj.borderColor}; box-shadow: 0 0 12px ${subj.borderColor}66;">
+                                <div class="w-11 h-11 rounded-lg bg-black border flex items-center justify-center mb-2 text-lg" style="border-color: ${subj.borderColor}; color: ${subj.borderColor};">
+                                    <i class="fa-solid ${subj.icon}"></i>
+                                </div>
+                                <span class="font-dohyeon text-lg text-white">${subj.name}</span>
+                                <span class="mt-1.5 text-[10px] font-bold px-2 py-0.5 rounded bg-white/10 text-white">
+                                    점수 스포 클릭
+                                </span>
+                            </div>
+
+                            <!-- 카드 뒷면 -->
+                            <div class="flip-card-back" style="${backStyle}">
+                                ${crownBadge}
+                                <span class="font-signboard text-3xl sm:text-4xl tracking-tight">${subj.score}</span>
+                                <span class="text-[11px] font-extrabold mt-0.5">${subj.grade}</span>
+                            </div>
+                        </div>
+                    `;
+
+                    cardWrapper.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        if (cardWrapper.classList.contains('flipped')) return;
+
+                        cardWrapper.classList.add('flipped');
+
+                        const rect = cardWrapper.getBoundingClientRect();
+                        const centerX = rect.left + rect.width / 2;
+                        const centerY = rect.top + rect.height / 2;
+
+                        playFanfareSound();
+                        if (subj.isPerfect) {
+                            showToast(`💥 미쳤다!! [${subj.name}] ${subj.score} 만점 폭발!! 💥`);
+                            createFirework(centerX, centerY - 60, true);
+                            setTimeout(() => createFirework(centerX - 60, centerY - 110, true), 120);
+                            setTimeout(() => createFirework(centerX + 60, centerY - 110, true), 240);
+                        } else {
+                            showToast(`⚡ 나이스!! [${subj.name}] ${subj.score} 1등급 확정!!`);
+                            createFirework(centerX, centerY - 60, true);
+                        }
+                    });
+
+                    subjectCardsGrid.appendChild(cardWrapper);
+                });
+            }
+
+            resetSubjectCardsBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                document.querySelectorAll('.subject-flip-card').forEach(card => {
+                    card.classList.remove('flipped');
+                });
+                showToast('🔄 성적표 간판 전원 리셋 완료!');
+            });
+
+            renderUniCards();
+            renderSubjectCards();
+
+            // 정신없는 서울 네온 컬러 팔레트
+            const neonColors = [
+                '#FF007F', // 네온 핑크
+                '#00F3FF', // 사이버 시안
+                '#FFE600', // 일렉트릭 옐로우
+                '#39FF14', // 네온 라임
+                '#FF5E00', // 네온 오렌지
+                '#BF00FF', // 네온 퍼플
+                '#FFFFFF'  // 화이트 플래시
+            ];
+
+            class Particle {
+                constructor(x, y, color, isGrand = false) {
+                    this.x = x;
+                    this.y = y;
+                    this.color = color;
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = isGrand 
+                        ? Math.random() * 8.5 + 2.5 
+                        : Math.random() * 6 + 2;
+                    this.vx = Math.cos(angle) * speed;
+                    this.vy = Math.sin(angle) * speed;
+                    this.alpha = 1;
+                    this.decay = Math.random() * 0.018 + 0.014;
+                    this.gravity = 0.06;
+                    this.friction = 0.95;
+                    this.size = Math.random() * 3 + 1.5;
+                    this.trail = [];
+                }
+
+                update() {
+                    this.trail.push({ x: this.x, y: this.y });
+                    if (this.trail.length > 5) this.trail.shift();
+
+                    this.vx *= this.friction;
+                    this.vy *= this.friction;
+                    this.vy += this.gravity;
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    this.alpha -= this.decay;
+                }
+
+                draw() {
+                    ctx.save();
+                    ctx.globalAlpha = Math.max(0, this.alpha);
+                    ctx.fillStyle = this.color;
+                    ctx.shadowBlur = 14;
+                    ctx.shadowColor = this.color;
+                    
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    if (this.trail.length > 1) {
+                        ctx.strokeStyle = this.color;
+                        ctx.lineWidth = this.size * 0.7;
+                        ctx.beginPath();
+                        ctx.moveTo(this.trail[0].x, this.trail[0].y);
+                        for (let i = 1; i < this.trail.length; i++) {
+                            ctx.lineTo(this.trail[i].x, this.trail[i].y);
+                        }
+                        ctx.stroke();
+                    }
+                    ctx.restore();
+                }
+            }
+
+            class Rocket {
+                constructor(targetX, targetY, isGrand = false) {
+                    this.x = targetX + (Math.random() - 0.5) * 120;
+                    this.y = height;
+                    this.targetX = targetX;
+                    this.targetY = targetY;
+                    this.isGrand = isGrand;
+                    const angle = Math.atan2(targetY - this.y, targetX - this.x);
+                    const speed = 13 + Math.random() * 4;
+                    this.vx = Math.cos(angle) * speed;
+                    this.vy = Math.sin(angle) * speed;
+                    this.color = neonColors[Math.floor(Math.random() * neonColors.length)];
+                    this.exploded = false;
+                }
+
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    
+                    if (this.y <= this.targetY) {
+                        this.exploded = true;
+                        createExplosion(this.x, this.y, this.color, this.isGrand);
+                        playSparkleSound();
+                    }
+                }
+
+                draw() {
+                    ctx.save();
+                    ctx.fillStyle = this.color;
+                    ctx.shadowBlur = 15;
+                    ctx.shadowColor = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+
+            let particles = [];
+            let rockets = [];
+
+            function createExplosion(x, y, baseColor, isGrand = false) {
+                const count = isGrand ? 100 : 60;
+                for (let i = 0; i < count; i++) {
+                    // 화려하고 정신없게 형광 컬러들을 마구 섞어서 폭발!
+                    const color = neonColors[Math.floor(Math.random() * neonColors.length)];
+                    particles.push(new Particle(x, y, color, isGrand));
+                }
+            }
+
+            function createFirework(targetX, targetY, isGrand = false) {
+                rockets.push(new Rocket(targetX, targetY, isGrand));
+            }
+
+            function animate() {
+                ctx.fillStyle = 'rgba(5, 5, 10, 0.25)';
+                ctx.fillRect(0, 0, width, height);
+
+                for (let i = rockets.length - 1; i >= 0; i--) {
+                    rockets[i].update();
+                    rockets[i].draw();
+                    if (rockets[i].exploded) {
+                        rockets.splice(i, 1);
+                    }
+                }
+
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    particles[i].update();
+                    particles[i].draw();
+                    if (particles[i].alpha <= 0) {
+                        particles.splice(i, 1);
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            canvas.addEventListener('click', (e) => {
+                createFirework(e.clientX, e.clientY, true);
+            });
+
+            canvas.addEventListener('touchstart', (e) => {
+                if (e.touches.length > 0) {
+                    const touch = e.touches[0];
+                    createFirework(touch.clientX, touch.clientY, true);
+                }
+            }, { passive: true });
+
+            // 폭죽 풀가동 버튼 (기존보다 더 정신없이 난사!)
+            const grandFireworksBtn = document.getElementById('grandFireworksBtn');
+            grandFireworksBtn.addEventListener('click', () => {
+                showToast('🎆 강남역 한복판급 네온 폭죽 난사 시작!! 🎆');
+                for (let i = 0; i < 12; i++) {
+                    setTimeout(() => {
+                        const rx = width * (0.1 + Math.random() * 0.8);
+                        const ry = height * (0.1 + Math.random() * 0.45);
+                        createFirework(rx, ry, true);
+                    }, i * 160);
+                }
+            });
+
+            // 더 빠르고 정신없는 자동 불꽃놀이
+            setInterval(() => {
+                if (document.visibilityState === 'visible' && rockets.length < 5) {
+                    const rx = width * (0.15 + Math.random() * 0.7);
+                    const ry = height * (0.12 + Math.random() * 0.4);
+                    createFirework(rx, ry, false);
+                }
+            }, 1300);
+
+            // 페이지 진입 시 환영 네온 폭죽 연발
+            setTimeout(() => createFirework(width * 0.2, height * 0.25, true), 200);
+            setTimeout(() => createFirework(width * 0.8, height * 0.25, true), 450);
+            setTimeout(() => createFirework(width * 0.5, height * 0.18, true), 700);
+
+            animate();
+        });
+    </script>
+</body>
+</html>
